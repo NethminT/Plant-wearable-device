@@ -45,7 +45,7 @@ It can be used to:
   - Achieved an approximately **linear sensitivity** of the capacitance with respect to RH.
 
 <p align="center">
-  <img src="images/MEMS_2.PNG" alt="Comb-Structured Humidity Sensor" width="600" />
+  <img src="images/MEMS_2.png" alt="Comb-Structured Humidity Sensor" width="400" />
 </p>
 
 ---
@@ -59,7 +59,7 @@ It can be used to:
   - Electrical simulation using COMSOL with defined PEDOT:PSS material properties  
 
 <p align="center">
-  <img src="images/MEMS_3.PNG" alt="Temperature Sensor Model" width="600" />
+  <img src="images/MEMS_3.png" alt="Temperature Sensor Model" width="600" />
 </p>
 
 ---
@@ -75,7 +75,7 @@ It can be used to:
   - Simulation results of **resistance variation** with the same load applied.
 
 <p align="center">
-  <img src="images/MEMS_4.PNG" alt="Strain Sensor Model" width="600" />
+  <img src="images/MEMS_4.png" alt="Strain Sensor Model" width="400" />
 </p>
 
 ---
