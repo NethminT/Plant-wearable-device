@@ -1,92 +1,131 @@
 # 🌿 Design of a Plant Wearable Device for Assessing Microclimate’s Impact on Plant Growth
 
 <p align="center">
-  <img src="images/Picture1.PNG" alt="AgriBot CAD Model" width="600"/>
+  <img src="images/MEMS_1.PNG" alt="AgriBot CAD Model" width="600"/>
 </p>
 
-## 🚀 Overview
+## 🌿 Overview
 
-AgriBot is a four-wheel drive and four-wheel steerable robotic platform designed for precision agriculture tasks, including **targeted fertilization** and **real-time plant inspection**, specifically tailored for cabbage farming over moderately rugged terrain. The robot aims to enhance agricultural productivity and reduce labor involvement using **autonomous mobility**, **suspension system**, **image-based disease detection**, and **ROS-based control integration**.
+This project presents a **flexible plant-wearable multi-sensory platform** designed to monitor the **microclimate around individual leaves** and **quantify plant growth** without harming the plant.  
+The device integrates **capacitive humidity**, **resistive temperature**, and **strain sensing** elements on a thin, lightweight, and conformal substrate, enabling localized monitoring of:
+
+- Leaf-surface temperature  
+- Ambient relative humidity  
+- Leaf area expansion (as a proxy for growth)
 
 ---
 
 ## 🌱 Application Domain
 
-The robot addresses key challenges in smart agriculture:
+The plant-wearable sensor is intended for **precision agriculture** and **plant science experiments**, where understanding microclimatic influence on growth is critical.
 
-- **Precision nutrient application** to avoid overuse of fertilizers.
-- **Real-time monitoring** of plant health using computer vision.
-- Operation in **rugged and uneven terrains** typical to open-field farming.
-- **Remote data acquisition** and daily reports for farmers.
+It can be used to:
+
+- Study **microclimate–growth relationships** at the leaf level  
+- Evaluate plant response under **different temperature and humidity conditions**  
+- Provide continuous, non-destructive measurements for **phenotyping and research**  
+- Support the design of **climate-optimized cultivation strategies**
 
 ---
 
 ## 🧠 Key Modules and Analysis
 
-### 🛠 Mechanical Design
+---
 
-- **Chassis**: X-frame-based for enhanced stability and modularity.
-- **Liquid Tank**: Baffled design with HDPE material to minimize CG shifts.
-- **Suspension**: Parallelogram mechanism to ensure camera stability and traction in rough terrains.
+### 💧 Humidity Sensor – Comb-Structured Capacitive Design
+
+- **Sensing principle:** Change in **capacitance** due to the variation of the **dielectric constant** of a polyimide film with absorbed moisture.  
+- **Structure:** **Interdigitated comb electrodes** (80 finger-like structures) to increase effective sensing area and sensitivity.  
+- **Materials:**
+  - **Silver (Ag)** interdigitated electrodes  
+  - **Polyimide** as the moisture-sensitive dielectric layer  
+- **Modeling & Analysis:**
+  - Electrostatic simulation using **COMSOL Multiphysics**  
+  - Parametric sweep of **0–100 %RH** to obtain capacitance–humidity characteristics  
+  - Achieved an approximately **linear sensitivity** of the capacitance with respect to RH.
 
 <p align="center">
-  <img src="images/Picture2.png" alt="Chassis and Suspension" width="600"/>
+  <img src="images/humidity_sensor_model.png" alt="Comb-Structured Humidity Sensor" width="600" />
 </p>
 
 ---
 
-### 📐 Structural and Dynamic Analysis
+### 🌡 Temperature Sensor – PEDOT:PSS-Based RTD
 
-- **Material selection** using ANSYS FEA simulations comparing multiple combinations.
-- **Topology optimization** for wheel bracket to reduce weight.
-- **Suspension damping analysis** for stability under dynamic loads.
-  
+- **Sensing principle:** **Resistance Temperature Detector (RTD)** behavior of **PEDOT:PSS** where resistance decreases with increasing temperature.  
+- **Structure:**
+  - Thin **PEDOT:PSS** strip patterned between silver electrodes  
+  - Optimized geometry to enhance sensitivity within **15–35 °C**, a typical plant growth range  
+  - Electrical simulation using COMSOL with defined PEDOT:PSS material properties  
+
 <p align="center">
-  <img src="images/Picture 3.PNG" alt="ANSYS Results" width="500"/>
+  <img src="images/temperature_sensor_model.png" alt="Temperature Sensor Model" width="600" />
 </p>
 
 ---
 
-### 🔧 Kinematic & Control System
+### 🌿 Strain Sensor – Leaf Growth Monitoring
 
-- **Four-wheel drive & steering** kinematic model developed in MATLAB.
-- **PID-based path tracking** controller implemented to follow desired trajectories.
-- **Dynamic torque analysis** using MSC ADAMS.
+- **Objective:** Measure **leaf area expansion** by detecting in-plane strain on the leaf surface.  
+- **Sensing material:** **Silver nanowire (AgNW)–PDMS nanocomposite** acting as a piezoresistive element.  
+- **Geometry:**
+  - Spiral / curved sensing path to enable **multi-directional strain detection**  
+  - Coupled **solid mechanics** and **electric current** simulations  
+  - Application of edge loads to emulate leaf expansion  
+  - Simulation results of **resistance variation** with the same load applied.
 
----
-
-### 🤖 Embedded & ROS Integration
-
-- **Drive and steering control** via Arduino microcontroller with timer interrupts.
-- **ROS integration** for sensor communication and high-level control.
-- Simulated in **Gazebo** and visualized via **RViz**.
-
----
-
-### 💡 Vision System
-
-- Used **YOLO** for real-time **leaf disease detection**.
-- Built dataset with multiple diseased leaf images due to lack of cabbage-specific datasets.
-- Trigger-based control: stops robot and activates pump upon detection.
-
+<p align="center">
+  <img src="images/strain_sensor_model.png" alt="Strain Sensor Model" width="600" />
+</p>
 
 ---
 
-## 🧪 Prototyping & Results
+### 🧪 Simulation & Design Optimization
 
-- Successfully integrated low-level Arduino code with high-level ROS nodes.
-- Built a prototype for field testing, including a basic Ackermann steering system.
-- Developed a **fertilizer spray system** responsive to vision-based commands.
+Across all three sensors:
+
+- **3D CAD models** created and imported into **COMSOL Multiphysics**.  
+- Dedicated physics interfaces:
+  - **Electrostatics** for humidity sensor  
+  - **Electric Currents** for temperature and strain sensors  
+  - **Solid Mechanics** for mechanical response of the strain sensor  
+- Performed:
+  - Parametric sweeps (humidity, temperature, and load)  
+  - Optimization of **geometry and material parameters** to improve sensitivity and linearity.  
+
+<p align="center">
+  <img src="images/comsol_results.png" alt="COMSOL Simulation Results" width="650" />
+</p>
 
 ---
 
-## 📦 Tools & Technologies
+### 🏭 Fabrication Workflow (Conceptual)
 
-- `SOLIDWORKS` for 3D modeling
-- `MATLAB` for kinematic modeling
-- `ANSYS` & `ADAMS` for structural/dynamic simulations
-- `Arduino` for low level control
-- `ROS (Noetic)` on `Ubuntu 20.04` for system integration
-- `YOLO` for real-time object detection
+> *High-level summary – detailed process steps are in the report.*
+
+- Patterning **AgNW networks** on a dummy substrate using **polyimide masks**.  
+- Casting **PDMS layers** to embed AgNW networks and form the flexible substrate.  
+- Sequential **photolithography and metal deposition** (Ti/Ag) to define electrodes.  
+- **Reactive Ion Etching (RIE)** to open contact regions and define sensor areas.  
+- Deposition of **polyimide** for the humidity sensing layer.  
+- Printing **Ag conductive ink** and drop-casting **PEDOT:PSS** for the temperature sensor.  
+- Final encapsulation of sensitive regions (e.g., with Kapton) where required for stability.
+
+<p align="center">
+  <img src="images/fabrication_flow.png" alt="Fabrication Flow of Plant Wearable" width="650" />
+</p>
+
+---
+
+## 🛠 Tools & Technologies
+
+- `SOLIDWORKS` for 2D drawings and 3D sensor/platform modeling  
+- `COMSOL Multiphysics` for coupled **electrical–mechanical simulations**  
+- `PDMS`, `Ag Nanowires`, `Polyimide`, `PEDOT:PSS` as core materials for flexible sensing  
+- Microfabrication concepts:
+  - Photolithography  
+  - Thin-film deposition  
+  - Reactive Ion Etching (RIE)  
+  - Printed conductive inks and solution processing
 
 ---
