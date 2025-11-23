@@ -45,7 +45,7 @@ It can be used to:
   - Achieved an approximately **linear sensitivity** of the capacitance with respect to RH.
 
 <p align="center">
-  <img src="images/humidity_sensor_model.png" alt="Comb-Structured Humidity Sensor" width="600" />
+  <img src="images/MEMS_2.PNG" alt="Comb-Structured Humidity Sensor" width="600" />
 </p>
 
 ---
@@ -59,7 +59,7 @@ It can be used to:
   - Electrical simulation using COMSOL with defined PEDOT:PSS material properties  
 
 <p align="center">
-  <img src="images/temperature_sensor_model.png" alt="Temperature Sensor Model" width="600" />
+  <img src="images/MEMS_3.PNG" alt="Temperature Sensor Model" width="600" />
 </p>
 
 ---
@@ -75,7 +75,7 @@ It can be used to:
   - Simulation results of **resistance variation** with the same load applied.
 
 <p align="center">
-  <img src="images/strain_sensor_model.png" alt="Strain Sensor Model" width="600" />
+  <img src="images/MEMS_4.PNG" alt="Strain Sensor Model" width="600" />
 </p>
 
 ---
@@ -93,29 +93,7 @@ Across all three sensors:
   - Parametric sweeps (humidity, temperature, and load)  
   - Optimization of **geometry and material parameters** to improve sensitivity and linearity.  
 
-<p align="center">
-  <img src="images/comsol_results.png" alt="COMSOL Simulation Results" width="650" />
-</p>
 
----
-
-### 🏭 Fabrication Workflow (Conceptual)
-
-> *High-level summary – detailed process steps are in the report.*
-
-- Patterning **AgNW networks** on a dummy substrate using **polyimide masks**.  
-- Casting **PDMS layers** to embed AgNW networks and form the flexible substrate.  
-- Sequential **photolithography and metal deposition** (Ti/Ag) to define electrodes.  
-- **Reactive Ion Etching (RIE)** to open contact regions and define sensor areas.  
-- Deposition of **polyimide** for the humidity sensing layer.  
-- Printing **Ag conductive ink** and drop-casting **PEDOT:PSS** for the temperature sensor.  
-- Final encapsulation of sensitive regions (e.g., with Kapton) where required for stability.
-
-<p align="center">
-  <img src="images/fabrication_flow.png" alt="Fabrication Flow of Plant Wearable" width="650" />
-</p>
-
----
 
 ## 🛠 Tools & Technologies
 
